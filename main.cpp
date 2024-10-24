@@ -29,18 +29,34 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
 
+    list <Goat> goat_gang;
+    for (int i = 0; i < 8; i++){
+        goat_gang.push_back(Goat(names[i], rand() % (MAX_AGE+1), colors[rand() % SZ_COLORS]));
+    }
 
-
+    int choice = main_menu();
+    while (choice !=4){
+        switch (choice){
+            case 1: add_goat(goat_gang,)
+                break
+            
+        }
+        }
 
     return 0;
 }
 
-
 int main_menu(){
+    int choice = 0;
     cout << "*** GOAT MANAGER 3001 ***" << endl;
     cout << "[1] Add a goat" << endl;
     cout << "[2] Delete a goat" << endl;
     cout << "[3] List goats" << endl;
     cout << "[4] Quit" << endl;
+    cin >> choice;
+    return choice;
+    }
+
+void add_goat(list<Goat> &trip, string [], string []){
+    
 }
- 
