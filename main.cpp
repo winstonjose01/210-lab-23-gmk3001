@@ -5,8 +5,10 @@
 #include "Goat.h"
 using namespace std;
 
+// Constant values for the size of names and colors arrays, and age range for goats
 const int SZ_NAMES = 200, SZ_COLORS = 25, MAX_AGE = 20, MIN = 5, MAX = 20;
 
+// F
 int select_goat(list<Goat> trip);
 void delete_goat(list<Goat> &trip, int i);
 void add_goat(list<Goat> &trip, string [], string []);
@@ -31,7 +33,7 @@ int main() {
     fin1.close();
 
     list <Goat> goat_gang;
-    for (int i = 0; i < (MIN + rand() % MAX-MIN + 1); i++){
+    for (int i = 0; i < (MIN + rand() % (MAX-MIN + 1)); i++){
         goat_gang.push_back(Goat(names[rand() % SZ_NAMES], rand() % (MAX_AGE+1), colors[rand() % SZ_COLORS]));
     }
 
@@ -42,14 +44,27 @@ int main() {
                     display_trip (goat_gang);
                 break;
             case 2: {
+                    if (goat_gang.size() == 0){
+                         cout << "There are no goats on the trip. Pls add a goat" << endl;
+                         cout << endl;
+                         break;
+                    }
                     int selection = select_goat(goat_gang);
+                    int i = 1;
+                    for (auto goat : goat_gang){
+                        if (i == selection){
+                            cout << "\t---Removing goat " << goat.get_name() << " (" << goat.get_age() << ", " << goat.get_color() << ")" << " from the trip---" << endl;
+                            break;
+                        }
+                        i++;
+                    }
                     delete_goat(goat_gang, selection);
                     display_trip (goat_gang);
             }
                 break;
             case 3: display_trip(goat_gang);
                 break;
-            case 4:
+            case 4: cout << endl;
                 return 0;
             default: cout << "Invalid input\n";
                 break;
@@ -68,6 +83,7 @@ int main_menu(){
     cout << "[3] List goats" << endl;
     cout << "[4] Quit" << endl;
     cout << "Choice --> ";
+
 
     cin >> choice;
     return choice;
@@ -110,14 +126,14 @@ int select_goat (list <Goat> trip){
     cout << "\tWhich goat is staying behind ? --> ";
     while (true) {
         cin >> selection;
-        if (cin.fail() || selection > trip.size()){
+        if (cin.fail() || selection > trip.size() || selection < 1){
             cin.clear();
             cin.ignore();
             cout << "Invalid input: Choose another goat -->";
         }
-        else
-            cin.ignore();
+        else{
             break;
+            }
     }
     return selection;
 }
