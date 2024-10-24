@@ -41,14 +41,18 @@ int main() {
             case 1: add_goat(goat_gang, names, colors);
                     display_trip (goat_gang);
                 break;
-            case 2: int selection = select_goat(goat_gang);
+            case 2: {
+                    int selection = select_goat(goat_gang);
                     delete_goat(goat_gang, selection);
                     display_trip (goat_gang);
+            }
                 break;
             case 3: display_trip(goat_gang);
                 break;
             case 4:
                 return 0;
+            default: cout << "Invalid input\n";
+                break;
             
         }
     }
@@ -58,7 +62,7 @@ int main() {
 
 int main_menu(){
     int choice = 0;
-    cout << "*** GOAT MANAGER 3001 ***" << endl;
+    cout << "\n*** GOAT MANAGER 3001 ***" << endl;
     cout << "[1] Add a goat" << endl;
     cout << "[2] Delete a goat" << endl;
     cout << "[3] List goats" << endl;
@@ -74,17 +78,28 @@ void add_goat(list<Goat> &trip, string n[], string c[]){
 }
 
 void display_trip (list<Goat> trip){
-    if i 
+    cout << "\tThere are " << trip.size() << " goats on this trip:" << endl;
+    int i = 1;
     for (auto goat : trip){
-        int i = 1;
-        cout << "\t[" << i++ << "] " << goat.get_name() << " (" << goat.get_age() << ", " << goat.get_color() << ")" << endl;
+        cout << setw(15) << "[" << i++ << "] " << goat.get_name() << " (" << goat.get_age() << ", " << goat.get_color() << ")" << endl;
     }
 }
 
 void delete_goat (list<Goat> &trip, int selection){
-    int i = 1;
-    for (auto goat : trip){
-        cout << "\t[" << i << "] " << goat.get_name() << " (" << goat.get_age() << ", " << goat.get_color() << ")" << endl;
+    int size_trip = trip.size();
+    if (selection == 1)
+        trip.pop_front();
+    else if (selection == size_trip)
+        trip.pop_back();
+    else{
+        int k = 1;
+        for (auto it = trip.begin(); it != trip.end(); ++it){
+            if (k == selection){
+                trip.erase(it);
+                break;
+            }
+            k++;
+        }
     }
 
 }
@@ -92,6 +107,17 @@ void delete_goat (list<Goat> &trip, int selection){
 int select_goat (list <Goat> trip){ 
     int selection;
     display_trip(trip);
-    cout << "Which goat is staying behind ? --> ";
-    cin >> selection;
+    cout << "\tWhich goat is staying behind ? --> ";
+    while (true) {
+        cin >> selection;
+        if (cin.fail() || selection > trip.size()){
+            cin.clear();
+            cin.ignore();
+            cout << "Invalid input: Choose another goat -->";
+        }
+        else
+            cin.ignore();
+            break;
+    }
+    return selection;
 }
