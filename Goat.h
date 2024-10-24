@@ -14,9 +14,9 @@ public:
     Goat()                          { name = ""; age = 0; color = ""; }
     // write three more constructors
 
-    Goat (string n)                  {name = n;}
-    Goat (string n, int a)           {name = n;age = a;}
-    Goat (string n, int a, string c) {name = n; age = a; color = c;}
+    Goat (string n)                  {name = n;}                // Constructor that takes only the name
+    Goat (string n, int a)           {name = n;age = a;}        // Constructor that takes name and age
+    Goat (string n, int a, string c) {name = n; age = a; color = c;}  // Constructor that takes name, age, and color
 
     // setters and getters
     void set_name(string n)         { name = n; };

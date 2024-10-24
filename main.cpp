@@ -1,3 +1,8 @@
+// COMSC 210 | Lab 23 | Winston Jose
+// IDE Used: Visual Studio Code
+// Github link : https://github.com/winstonjose01/210-lab-23-gmk3001/commits/main/  
+
+
 #include <iostream>
 #include <fstream>
 #include <iomanip>
@@ -58,7 +63,7 @@ int main() {
                     int i = 1;
                     for (auto goat : goat_gang){
                         if (i == selection){
-                            cout << "\t---Removing goat " << goat.get_name() << " (" << goat.get_age() << ", " << goat.get_color() << ")" << " from the trip---" << endl;
+                            cout << "\n\t---Removing goat " << goat.get_name() << " (" << goat.get_age() << ", " << goat.get_color() << ")" << " from the trip---" << endl;
                             break;
                         }
                         i++;
